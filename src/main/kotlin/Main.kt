@@ -1,6 +1,22 @@
 package dev.dead
 
+import kotlin.random.Random
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+fun nullableStringReturn(): String? {
+    val bool = Random.nextBoolean()
+    return when (bool) {
+        true -> {
+            "Hello World"
+        }
+        false->{
+//            null
+            ""
+        }
+
+    }
+}
+
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
     val name = "Kotlin"
@@ -16,4 +32,7 @@ fun main() {
     }
     val hehe = TestTestDemoH()
     println(hehe.returnHelloString())
+    println("_".repeat(10))
+    println(nullableStringReturn())
+    println(nullableStringReturn()?.ifEmpty { "It was empty" })
 }
