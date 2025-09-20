@@ -35,4 +35,5 @@ fun main() {
     println("_".repeat(10))
     println(nullableStringReturn())
     println(nullableStringReturn()?.ifEmpty { "It was empty" })
+    println()
 }
