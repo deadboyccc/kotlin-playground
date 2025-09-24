@@ -41,6 +41,8 @@ suspend fun main() {
     val p1 = TestPerson("Joe")
     val p2 = TestPerson("Joe")
     println(p1.name)
+    println(p1.toString())
+
 
 
 }
