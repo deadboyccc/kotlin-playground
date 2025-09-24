@@ -1,6 +1,14 @@
 package dev.dead.extras
 
 import kotlinx.coroutines.*
+import kotlin.system.measureTimeMillis
+
+var count = 0;
+suspend fun waitTwoSeconds() {
+    delay(2000L)
+    count++
+    println("[Waiting for five seconds...]  ---  [#$count]")
+}
 
 fun partThree() {
     runBlocking {
@@ -14,14 +22,82 @@ fun partThree() {
     }
 }
 
+fun partFive() {
+    runBlocking() {
+        val windows: Deferred<Product> = async(Dispatchers.IO) { order(Product.WINDOWS) }
+        val doors: Deferred<Product> = async(Dispatchers.IO)
+        { order(Product.DOORS) }
+            .also { cancel() }
+        launch(Dispatchers.Default) {
+            perform("Laying bricks")
+            launch { perform("Installing ${windows.await().description}") }
+            launch { perform("Installing ${doors.await().description}") }
+        }
+
+//        cancel()
+    }
+
+}
+
+fun partFour() {
+    runBlocking() {
+        val windows: Deferred<Product> = async(Dispatchers.IO) { order(Product.WINDOWS) }
+        val doors: Deferred<Product> = async(Dispatchers.IO) { order(Product.DOORS) }
+        launch(Dispatchers.Default) {
+            perform("Laying bricks")
+            launch { perform("Installing ${windows.await().description}") }
+            launch { perform("Installing ${doors.await().description}") }
+        }
+
+//        cancel()
+    }
+
+}
+
 fun main() {
+    runBlocking {
+        val coresCount = Runtime.getRuntime().availableProcessors()
+        println("Cores: $coresCount")
+
+        val time = measureTimeMillis {
+            val jobs = List(1000) { async(Dispatchers.Default) { waitTwoSeconds() } }
+            jobs.awaitAll() // Wait for all coroutines to finish
+        }
+
+        println("Total exec time: ${time / 1000.0} seconds")
+        println("DONE WAITING")
+    }
+//    // print nums of cores
+//    val coresCount: Int = Runtime.getRuntime().availableProcessors()
+//    println("Cores: $coresCount")
+//    runBlocking(Dispatchers.IO) {
+//        val start: LocalDateTime = LocalDateTime.now()
+//        val firstWait = async { waitTwoSeconds() }
+//        val secondWait = async { waitTwoSeconds() }
+//        val thirdWait = async { waitTwoSeconds() }
+//        val fourthWait = async { waitTwoSeconds() }
+//        val fifthWait = async { waitTwoSeconds() }
+//        val sixthWait = async { waitTwoSeconds() }
+//        for (i in 1..400){
+//            async { waitTwoSeconds() }
+//
+//        }
+//
+////        awaitAll(firstWait, secondWait, thirdWait, fourthWait, fifthWait, sixthWait)
+//        val end: LocalDateTime = LocalDateTime.now()
+//        println("Total exec time : ${start.until(end, ChronoUnit.SECONDS)}")
+//
+//        println("DONE WAITING")
+
+}
+//    partFour()
 
     // simple yield()
 //    partOne()
     // sync
 //    partTwo()
     // coroutine per task
-}
+//}
 
 fun partTwo() {
     val windows = orderSync(Product.WINDOWS)
