@@ -1,7 +1,7 @@
 package dev.dead.extras
 
 import kotlinx.coroutines.*
-import kotlin.system.measureTimeMillis
+import kotlin.system.measureNanoTime
 
 var count = 0;
 suspend fun waitTwoSeconds() {
@@ -59,12 +59,17 @@ fun main() {
         val coresCount = Runtime.getRuntime().availableProcessors()
         println("Cores: $coresCount")
 
-        val time = measureTimeMillis {
-            val jobs = List(1000) { async(Dispatchers.Default) { waitTwoSeconds() } }
+        val time = measureNanoTime {
+            val jobs: List<Deferred<Unit>> = List(12) { async(Dispatchers.Default) { waitTwoSeconds() } }
+//            jobs.parallelStream().forEach {
+//                println("Job: ${it}")
+//
+//            }
             jobs.awaitAll() // Wait for all coroutines to finish
         }
 
-        println("Total exec time: ${time / 1000.0} seconds")
+
+        println("Total exec time: ${time / 1000000000.0} seconds")
         println("DONE WAITING")
     }
 //    // print nums of cores
