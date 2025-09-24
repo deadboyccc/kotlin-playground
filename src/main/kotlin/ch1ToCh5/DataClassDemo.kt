@@ -1,4 +1,4 @@
-package dev.dead
+package dev.dead.ch1ToCh5
 
 import java.math.BigDecimal
 import java.util.*

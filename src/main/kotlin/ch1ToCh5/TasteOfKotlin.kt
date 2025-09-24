@@ -1,4 +1,4 @@
-package dev.dead
+package dev.dead.ch1ToCh5
 
 data class Person(val name: String, val age: Int? = null)
 
