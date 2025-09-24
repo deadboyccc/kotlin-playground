@@ -5,9 +5,9 @@ class TestTestDemoH {
     fun main(){
         println(returnHelloString())
         val hashMap = hashMapOf<String, Int>()
-        hashMap.put("one", 1)
-        hashMap.put("two", 2)
-        hashMap.put("three", 3)
+        hashMap["one"] = 1
+        hashMap["two"] = 2
+        hashMap["three"] = 3
         println(hashMap)
         for ((key, value) in hashMap) {
             println("$key -> $value")
