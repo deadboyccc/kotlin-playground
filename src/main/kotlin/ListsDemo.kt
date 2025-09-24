@@ -13,4 +13,5 @@ fun main(){
     typicalList.forEach { println(it) }
     println("_".repeat(30))
     typicalList.map { it * it }.forEach { println(it) }
+
 }
