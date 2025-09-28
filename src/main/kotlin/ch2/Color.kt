@@ -22,10 +22,13 @@ enum class Color(
     val blue: Int
         get() = b * 256 + r
 
-    fun main() {
-        println(Color.BLUE.rgb())
-        println("_".repeat(20))
-        val s = setOfNotNull(Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE)
-        println(s)
-    }
+}
+
+fun main() {
+    println(Color.BLUE.rgb())
+    println("_".repeat(20))
+    val s = setOfNotNull(Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE)
+    println(s)
+    val reds = s.map { it.red }
+    reds.forEach { println(it) }
 }
