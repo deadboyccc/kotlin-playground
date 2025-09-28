@@ -14,12 +14,15 @@ enum class Color(
     VIOLET(238, 130, 238);
 
     fun rgb() = (r * 256 + g) * 256 + b
-    fun getRed() = r * 256 + g    // Changed from getR to getRed
-    fun getGreen() = g * 256 + b  // Changed from getG to getGreen for consistency
-    fun getBlue() = b * 256 + r   // Changed from getB to getBlue for consistency
-}
+    val red: Int
+        get() = r * 256 + g
 
-fun main() {
+    val green: Int
+        get() = g * 256 + b
+    val blue: Int
+        get() = b * 256 + r
+
+    fun main() {
     println(Color.BLUE.rgb())
     println("_".repeat(20))
     val s = setOfNotNull(Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE)
