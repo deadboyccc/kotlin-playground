@@ -23,8 +23,9 @@ enum class Color(
         get() = b * 256 + r
 
     fun main() {
-    println(Color.BLUE.rgb())
-    println("_".repeat(20))
-    val s = setOfNotNull(Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE)
-    println(s)
+        println(Color.BLUE.rgb())
+        println("_".repeat(20))
+        val s = setOfNotNull(Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN, Color.BLUE)
+        println(s)
+    }
 }
